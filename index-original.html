@@ -1,134 +1,114 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <script src="https://code.jquery.com/jquery-2.2.3.js"></script>  
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-  <!-- 
-  DONE
-  include Bootstrap JS file
-  -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-  <link rel="stylesheet" href="css/styles.css"/>
-
-  <title>FlickList</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-2.2.3.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!--
+    DONE
+    include Bootstrap JS file
+    -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>FlickList</title>
 </head>
 <body>
-
-  <header class="jumbotron">
-    <h1>FlickList</h1>
-    <p>Keep a list of all the movies you've been meaning to watch.</p>
-  </header>
-
-  <section id="section-watchlist">
-    <header>
-      <h2>My Watchlist</h2>
-      <hr/>
+    <header class="jumbotron">
+        <h1>FlickList</h1>
+        <p>Keep a list of all the movies you've been meaning to watch.</p>
     </header>
-
-    <ul></ul>
-  </section>
-
-  <section id="section-browse">
-    <div class="row">
-
-      <!-- 
-      DONE 
-      Build out movie info with Bootstrap carousel
-      -->
-      <div class="col-sm-8"/>
-        <div class="well">
-          <div class="row">
-
-            <div class="col-sm-7" id="browse-info"></div> 
-
-            <div class="col-sm-5">
-              <div class="carousel slide" id="browse-carousel"/>
-
-                <div class="carousel-inner" role="listbox"></div>
-
-                <a class="left carousel-control" href="#browse-carousel" role="button" data-slide="prev">
-                  <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a class="right carousel-control" href="#browse-carousel" role="button" data-slide="next">
-                  <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
-
-              </div>
-              <button class="btn btn-primary" id="add-to-watchlist"/>
-                Add to Watchlist
-              </button>
-            </div> 
-          </div>
+    <section id="section-watchlist">
+        <header>
+            <h2>My Watchlist</h2>
+            <hr />
+        </header>
+        <ul></ul>
+    </section>
+    <section id="section-browse">
+        <div class="row">
+            <!--
+            DONE
+            Build out movie info with Bootstrap carousel
+            -->
+            <div class="col-sm-8" />
+            <div class="well">
+                <div class="row">
+                    <div class="col-sm-7" id="browse-info"></div>
+                    <div class="col-sm-5">
+                        <div class="carousel slide" id="browse-carousel" />
+                        <div class="carousel-inner" role="listbox"></div>
+                        <a class="left carousel-control" href="#browse-carousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#browse-carousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                    <button class="btn btn-primary" id="add-to-watchlist" />
+                    Add to Watchlist
+                    </button>
+                </div>
+            </div>
         </div>
         <ul class="list-group"></ul>
-      </div>
+        </div>
 
-      <!--
-      DONE
-      move the form to the right of the movie info and carousel
-      -->
-      <div class="col-sm-4">
-        
-        <header>
-          <h3>Browse Movies</h3>
-        </header>
+        <!--
+        DONE
+        move the form to the right of the movie info and carousel
+        -->
+        <div class="col-sm-4">
 
-        <form id="form-search">
-          <div class="form-group">
-            <input type="text" name="query" class="form-control"/>
-          </div>
-          <div class="form-group">
-            <input type="submit" value="Search By Keyword" class="btn btn-primary"/>
-          </div>
-        </form>
-      </div>
+            <header>
+                <h3>Browse Movies</h3>
+            </header>
+            <form id="form-search">
+                <div class="form-group">
+                    <input type="text" name="query" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Search By Keyword" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        </div>
+    </section>
+    <footer class="container">
+        <p>
+            2016 LaunchCode |
+            <a href="https://github.com/LaunchCodeEducation/flicklist">Fork me on Github</a>
+        </p>
+    </footer>
+    <script src="js/flicklist.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#form-search").submit(function (evt) {
+                evt.preventDefault();
+                var query = $("#form-search input[name=query]").val();
+                searchMovies(query, render);
+            });
 
-    </div>
-  </section>
+            // DONE
+            // add event handler to the "Add to Watchlist" button
+            $("#add-to-watchlist").click(function () {
+                addActiveMovie();
+                render();
+            });
 
-  <footer class="container">
-    <p>
-      2016 LaunchCode | 
-      <a href="https://github.com/LaunchCodeEducation/flicklist">Fork me on Github</a>
-    </p>
-  </footer>
+            // DONE
+            // add event handler for when the carousel has slid
+            $("#browse-carousel").bind("slid.bs.carousel", function () {
+                console.log("slid")
+                var newIndex = $("#browse-carousel").find(".active").index();
+                console.log(newIndex);
+                model.browseActiveIndex = newIndex;
+                render();
+            });
 
-  <script src="js/flicklist.js"></script>
-  <script>
-    $(document).ready(function() {
-      $("#form-search").submit(function(evt) {
-        evt.preventDefault();
-        var query = $("#form-search input[name=query]").val();
-        searchMovies(query, render);
-      });
-
-      // DONE
-      // add event handler to the "Add to Watchlist" button
-      $("#add-to-watchlist").click(function() {
-        addActiveMovie();
-        render();
-      });
-
-      // DONE
-      // add event handler for when the carousel has slid
-      $("#browse-carousel").bind("slid.bs.carousel", function() {
-          console.log("slid")
-          var newIndex = $("#browse-carousel").find(".active").index();
-          console.log(newIndex);
-          model.browseActiveIndex = newIndex;
-          render();
-      });
-
-      // initial fetch
-      searchMovies("", render);
-    });
-  </script>
-
-</body> 
+            // initial fetch
+            searchMovies("", render);
+        });
+    </script>
+</body>
 </html>
