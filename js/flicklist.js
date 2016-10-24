@@ -132,11 +132,11 @@ function renderWatchlist() {
     var watchlistItemsContainer = $("#watchlistItems");
     watchlistItemsContainer.html("");
 
-    var hasAtLeastOneItem = false;
+    var watchlistCount = 0;
 
     // insert watchlist items
     model.watchlistItems.forEach(function (movie) {
-        hasAtLeastOneItem = true;
+        watchlistCount += 1;
 
         // Build up Actions
         var likeButton = $("<i>thumb_up</i>")
@@ -188,8 +188,15 @@ function renderWatchlist() {
         watchlistItemsContainer.append(outerDiv);
     });
 
-    // handle empty watchlist
-    if (!hasAtLeastOneItem) {
+    if (watchlistCount > 0) {
+        //handle watchlist Badge
+        $("#watchlistBadge").show();
+        $("#watchlistBadge").text(watchlistCount);
+    } else {
+        //handle watchlist Badge
+        $("#watchlistBadge").hide();
+
+        // handle empty watchlist
         watchlistItemsContainer.append("<center><h5>Add items to your Watchlist</h5></center>");
     }
 }

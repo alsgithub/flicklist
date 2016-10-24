@@ -12,7 +12,11 @@
 <body>
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo">FlickList</a>
+        <a id="logo-container" href="#" class="brand-logo grey-text text-darken-3">FlickList</a>
+
+        <ul id="nav-mobile" class="right">
+            <li><a href="#">Watchlist <span id="watchlistBadge" style="display: none" class="new badge grey"></span></a></li>
+        </ul>
     </div>
 </nav>
 
@@ -20,6 +24,7 @@
 <div class="container">
     <div class="section">
         <div class="row">
+            
             <!-- Carousel -->
             <div class="col s12 m7">
                 <div id="movieCarousel" class="carousel"></div>
@@ -34,16 +39,18 @@
                     <h5 id="activeRemoveFromWatchlist" style="display: none"><a class="btn-floating waves-effect waves-light blue-grey" href="javascript:removeActiveMovieFromWatchlist()"><i class="material-icons">delete</i></a> Remove from Watchlist</h5>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 
 
-<!-- Row: Watchlist -->
-
+<!-- Row: Watchlist & Search -->
 <div class="container">
     <div class="section">
         <div class="row">
+            
+            <!-- Watchlist -->
             <div class="col s12 m7">
                 <div class="card hoverable grey lighten-3">
                     <div class="card-content white-text">
@@ -55,6 +62,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Search -->
             <div class="col s12 m5">
                 <div class="card hoverable grey lighten-1">
                     <div class="card-content white-text" style="padding: 10px; margin: 10px">
@@ -75,6 +84,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -99,7 +109,6 @@
 <!-- Scripts-->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/materialize.js"></script>
-<script src="js/init.js"></script>
 <script src="js/flicklist.js"></script>
 
 <script>
