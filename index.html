@@ -10,88 +10,104 @@
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
 <body>
-    <nav class="white" role="navigation">
-        <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">FlickList</a>
+<nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+        <a id="logo-container" href="#" class="brand-logo">FlickList</a>
+    </div>
+</nav>
 
-            <!--<div class="right">
-                <form id="form-search">
-                    <div class="input-field">
-                        <input type="text" id="search-field" class="validate"/>
-                        <label for="search-field">Genre, Title or Keyword</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Search By Keyword" class="btn btn-primary"/>
-                    </div>
-                </form>
-            </div>-->
+<!-- Row: Carousel & Description -->
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <!-- Carousel -->
+            <div class="col s12 m7">
+                <div id="movieCarousel" class="carousel"></div>
+            </div>
+
+            <!-- Description -->
+            <div class="col s12 m5">
+                <div class="section" style="padding-top: 110px">
+                    <h5 id="activeTitle"></h5>
+                    <p id="activeDescription" style="padding-bottom: 10px"></p>
+                    <h5 id="activeAddToWatchlist" style="display: none"><a class="btn-floating waves-effect waves-light blue-grey" href="javascript:addActiveMovie()"><i class="material-icons">add</i></a> Add to Watchlist</h5>
+                    <h5 id="activeRemoveFromWatchlist" style="display: none"><a class="btn-floating waves-effect waves-light blue-grey" href="javascript:removeActiveMovieFromWatchlist()"><i class="material-icons">delete</i></a> Remove from Watchlist</h5>
+                </div>
+            </div>
         </div>
-    </nav>
+    </div>
+</div>
 
-    <!-- Row: Carousel & Description -->
+
+<!-- Row: Watchlist -->
+
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <div class="col s12 m7">
+                <div class="card hoverable grey lighten-3">
+                    <div class="card-content white-text">
+                        <span class="card-title grey-text text-darken-3">Watchlist</span>
+
+                        <div id="watchlistItems" class="row" style="padding-bottom: 10px">
+                            <!-- Dynamically loaded -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m5">
+                <div class="card hoverable grey lighten-1">
+                    <div class="card-content white-text" style="padding: 10px; margin: 10px">
+                        <span class="card-title grey-text text-darken-3">Search</span>
+                        <div class="row">
+                            <form id="form-search">
+                                <div class="col s8 m10" style="padding-top: 10px">
+                                    <div class="input-field blue-grey-text lighten-1" style="padding: 0px; margin: 0px">
+                                        <label for="search-field">Genre, Title or Keyword</label>
+                                        <input type="text" id="search-field" class=""/>
+                                    </div>
+                                </div>
+                                <div class="col s4 m2" style="padding-top: 0px; margin-top: 0px">
+                                    <a onclick="$(this).closest('form').submit()" class="btn-floating btn-large waves-effect waves-light blue-grey"><i class="material-icons">search</i></a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="page-footer blue-grey">
     <div class="container">
-        <div class="section">
-            <div class="row">
-                <!-- Carousel -->
-                <div class="col s12 m8">
-                    <div id="movieCarousel" class="carousel"></div>
-                </div>
-
-                <!-- Description -->
-                <div class="col s12 m4">
-                    <div class="section" style="padding-top: 110px">
-                        <h5 id="activeTitle">The Magnificent Seven</h5>
-                        <p id="activeDescription" style="padding-bottom: 10px">A big screen remake of John Sturges' classic western The Magnificent Seven, itself a remake of Akira Kurosawa's Seven Samurai. Seven gun men in the old west gradually come together to help a poor village against savage thieves.</p>
-                        <h5 id="activeAddToWatchlist" style="display: none"><a class="btn-floating waves-effect waves-light blue-grey" href="javascript:addActiveMovie()"><i class="material-icons">add</i></a> Add to Watchlist</h5>
-                        <h5 id="activeRemoveFromWatchlist" style="display: none"><a class="btn-floating waves-effect waves-light blue-grey" href="javascript:removeActiveMovieFromWatchlist()"><i class="material-icons">delete</i></a> Remove from Watchlist</h5>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col l12 s12">
+                <p class="grey-text text-lighten-4"><a class="brown-text text-lighten-4" href="https://www.launchcode.org/">LaunchCode</a> matches you with world class learning resources and job opportunities to help you launch your career in technology
+                </p>
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col m1"></div>
-        <div class="col s12 m10">
-            <div class="card hoverable grey lighten-3">
-                <div class="card-content white-text">
-                    <span class="card-title grey-text text-darken-3">Watchlist</span>
-
-                    <div id="watchlistItems" class="row">
-                        <!-- Dynamically loaded -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="page-footer blue-grey">
+    <div class="footer-copyright">
         <div class="container">
-            <div class="row">
-                <div class="col l12 s12">
-                    <p class="grey-text text-lighten-4"><a class="brown-text text-lighten-4" href="https://www.launchcode.org/">LaunchCode</a> matches you with world class learning resources and job opportunities to help you launch your career in technology</p>
-                </div>
-            </div>
+            Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
         </div>
-        <div class="footer-copyright">
-            <div class="container">
-                Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-            </div>
-        </div>
-    </footer>
+    </div>
+</footer>
 
-    <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script>
+<!-- Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
 <script src="js/flicklist.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            initializePage();
-        });
-    </script>
+<script>
+    $(document).ready(function() {
+        initializePage();
+    });
+</script>
 
 </body>
+
 </html>

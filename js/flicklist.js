@@ -17,18 +17,12 @@ var api = {
 
 
 function initializePage() {
-    //$("#form-search").submit(function(evt) {
-    //    evt.preventDefault();
-    //    var query = $("#form-search input[name=query]").val();
-    //    searchMovies(query, render);
-    //});
-
-    //// DONE
-    //// add event handler to the "Add to Watchlist" button
-    //$("#add-to-watchlist").click(function() {
-    //    addActiveMovie();
-    //    render();
-    //});
+    // Hook up the Submit Button
+    $("#form-search").submit(function (evt) {
+        evt.preventDefault();
+        var query = $("#search-field").val();
+        searchMovies(query, render);
+    });
 
     // initial fetch
     searchMovies("", render);
@@ -48,6 +42,8 @@ function discoverMovies(data, callback) {
         data: data,
         success: function (response) {
             model.browseItems = response.results;
+            // Reset Active Index since browser items were reset
+            model.browseActiveIndex = 0;
             callback(response);
         },
         fail: function () {
@@ -56,21 +52,20 @@ function discoverMovies(data, callback) {
     });
 }
 
-
 function searchMovies(query, callback) {
     fetchKeywords(
       query,
       function (keywordsResponse) {
           console.log("fetch succeeded");
-          var firstKeywordID = keywordsResponse.results[0].id
+          var firstKeywordId = keywordsResponse.results[0].id;
           var data = {
               api_key: api.token,
-              with_keywords: firstKeywordID
+              with_keywords: firstKeywordId
           };
           discoverMovies(data, callback);
       },
       function () {
-          console.log("fetchkeywords failed")
+          console.log("fetchkeywords failed");
           var data = {
               api_key: api.token
           };
@@ -78,7 +73,6 @@ function searchMovies(query, callback) {
       }
     );
 }
-
 
 /**
  * Makes an AJAX request to the /search/keyword endpoint of the API,
@@ -105,26 +99,17 @@ function fetchKeywords(query, cbSuccess, cbError) {
  * re-renders the page with new content, based on the current state of the model
  */
 function render() {
-    //var watchlistElement = $("#section-watchlist ul");
-    //var carouselInner = $("#section-browse .carousel-inner");
-    //var browseInfo = $("#browse-info");
-
-    //// clear everything
-    //watchlistElement.empty();
-    //carouselInner.empty();
-    //browseInfo.empty();
-
-
     renderCarousel();
     renderWatchlist();
     renderActiveDetails();
-
 }
 
 function renderCarousel() {
+    // clear all carousel items
+    $("#movieCarousel").empty();
+
     // insert browse items
     model.browseItems.forEach(function (movie, index) {
-
         var poster = $("<img></img>")
           .attr("src", posterUrl(movie, "w300"));
 
@@ -135,7 +120,6 @@ function renderCarousel() {
 
         $("#movieCarousel").append(carouselItem);
     });
-
 
     // material design Carousel Initialization
     // remove initialized class if exists, and then initialize
@@ -156,19 +140,19 @@ function renderWatchlist() {
 
         // Build up Actions
         var likeButton = $("<i>thumb_up</i>")
-            .attr("class", "material-icons");
+            .attr("class", "tiny material-icons");
         var dislikeButton = $("<i>thumb_down</i>")
-            .attr("class", "material-icons");
+            .attr("class", "tiny material-icons");
         var deleteButton = $("<i>delete</i>")
-            .attr("class", "material-icons");
+            .attr("class", "tiny material-icons");
 
         var likeLink = $("<a></a>")
-            .attr("href", "http://www.google.com")
+            .attr("href", "#")
             .attr("class", "brown-text text-lighten-3")
             .attr("style", "padding-right: 15px")
             .append(likeButton);
         var dislikeLink = $("<a></a>")
-            .attr("href", "http://www.google.com")
+            .attr("href", "#")
             .attr("class", "brown-text text-lighten-3")
             .attr("style", "padding-right: 40px")
             .append(dislikeButton);
@@ -198,7 +182,7 @@ function renderWatchlist() {
             .append(imageContainerDiv)
             .append(actionContainerDiv);
         var outerDiv = $("<div></div>")
-            .attr("class", "col s6 m2")
+            .attr("class", "col s6 m3")
             .append(cardDiv);
 
         watchlistItemsContainer.append(outerDiv);
@@ -206,7 +190,7 @@ function renderWatchlist() {
 
     // handle empty watchlist
     if (!hasAtLeastOneItem) {
-        watchlistItemsContainer.append("<h5 class='text-grey'>Add items to your Watchlist</h5>");
+        watchlistItemsContainer.append("<center><h5>Add items to your Watchlist</h5></center>");
     }
 }
 
@@ -261,5 +245,6 @@ function setActiveMovie(movieIndex) {
     // Store the active movie index on the model
     // render the active movie details
     model.browseActiveIndex = movieIndex;
+
     renderActiveDetails();
 }
