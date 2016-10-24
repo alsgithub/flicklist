@@ -105,26 +105,73 @@ function render() {
 }
 
 function renderCarousel() {
-    // clear all carousel items
-    $("#movieCarousel").empty();
+    // clear top level carousel element
+    $("#movieCarouselOuter").remove();
 
-    // insert browse items
+    // rebuild entire carousel (so searches and 'refreshes' work)
+    var carouselChild = $("<ul></ul>")
+        .attr("id", "movieCarousel")
+        .attr("class", "sky-carousel-container");
+
+    var carouselParent = $("<div></div>")
+        .attr("id", "movieCarouselParent")
+        .attr("class", "sky-carousel-wrapper")
+        .append(carouselChild);
+
+    var carouselOuter = $("<div></div>")
+    .attr("id", "movieCarouselOuter")
+    .attr("class", "sky-carousel")
+    .append(carouselParent);
+
+    $("#movieCarouselHost").append(carouselOuter);
+
+    // insert movie (browse) items
+    var numberOfItems = 0;
+
     model.browseItems.forEach(function (movie, index) {
+        numberOfItems += 1;
+
         var poster = $("<img></img>")
+            .attr("width", 200)
+            .attr("height", 300)
           .attr("src", posterUrl(movie, "w300"));
 
-        var carouselItem = $("<a></a>")
-          .attr("class", "carousel-item")
-          .attr("href", "javascript:setActiveMovie(" + index + ")")
+        var carouselItem = $("<li></li>")
           .append(poster);
 
-        $("#movieCarousel").append(carouselItem);
+        carouselChild.append(carouselItem);
     });
 
-    // material design Carousel Initialization
-    // remove initialized class if exists, and then initialize
-    $('.carousel').removeClass("initialized");
-    $('.carousel').carousel();
+    // Sky jQuery Carousel
+	var carousel = $('.sky-carousel').carousel({
+		itemWidth: 200,
+		itemHeight: 300,
+		distance: 15,
+		selectedItemDistance: 20,
+		selectedItemZoomFactor: .8,
+		unselectedItemZoomFactor: 0.67,
+		unselectedItemAlpha: 0.6,
+		motionStartDistance: 170,
+		topMargin: 119,
+		gradientStartPoint: 0.35,
+		gradientOverlayColor: "#ffffff",
+		gradientOverlaySize: 20,
+		reflectionDistance: 1,
+		reflectionAlpha: 0.35,
+		reflectionVisible: true,
+		reflectionSize: 70,
+		selectByClick: true,
+		navigationButtonsVisible: false
+	});
+
+    // Bind the 'itemSelected' event to update movie details
+	carousel.on('itemSelected.sc', function (evt) {
+		setActiveMovie(evt.item.index());
+	});
+
+    // manually select middle item (so the details will match the visible item)
+	carousel.select(numberOfItems / 2, 0);
+
 }
 
 function renderWatchlist() {

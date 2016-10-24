@@ -7,7 +7,9 @@
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <!-- Sky jQuery Carousel-->
+    <link href="css/default_skin_variation.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 <nav class="white" role="navigation">
@@ -26,17 +28,27 @@
         <div class="row">
             
             <!-- Carousel -->
-            <div class="col s12 m7">
-                <div id="movieCarousel" class="carousel"></div>
+            <div id="movieCarouselHost" class="col s12 m12 l7">
+                <!--<div id="movieCarousel" class="carousel"></div>-->
+
+
+                <div id="movieCarouselOuter" class="sky-carousel">
+                    <div id="movieCarouselParent" class="sky-carousel-wrapper">
+                        <ul id="movieCarousel" class="sky-carousel-container">
+                            <!-- Dynamic -->
+                        </ul>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Description -->
-            <div class="col s12 m5">
+            <div class="col s12 m12 l5">
                 <div class="section" style="padding-top: 110px">
                     <h5 id="activeTitle"></h5>
                     <p id="activeDescription" style="padding-bottom: 10px"></p>
-                    <h5 id="activeAddToWatchlist" style="display: none"><a class="btn-floating waves-effect waves-light blue-grey" href="javascript:addActiveMovie()"><i class="material-icons">add</i></a> Add to Watchlist</h5>
-                    <h5 id="activeRemoveFromWatchlist" style="display: none"><a class="btn-floating waves-effect waves-light blue-grey" href="javascript:removeActiveMovieFromWatchlist()"><i class="material-icons">delete</i></a> Remove from Watchlist</h5>
+                    <h5 id="activeAddToWatchlist" style="display: none"><a class="btn-floating waves-effect waves-light blue-grey" href="javascript:addActiveMovie()"><i class="material-icons">add</i></a> <span onclick="javascript: addActiveMovie();" >Add to Watchlist</span></h5>
+                    <h5 id="activeRemoveFromWatchlist" style="display: none"><a class="btn-floating waves-effect waves-light blue-grey" href="javascript:removeActiveMovieFromWatchlist()"><i class="material-icons">delete</i></a> <span onclick="javascript: removeActiveMovieFromWatchlist();">Remove from Watchlist</span></h5>
                 </div>
             </div>
 
@@ -110,6 +122,8 @@
 <!-- Scripts-->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/materialize.js"></script>
+<!-- Sky jQuery Carousel-->
+<script type="text/javascript" src="js/jquery.sky.carousel-1.0.2.min.js"></script>
 <script src="js/flicklist.js"></script>
 
 <script>
