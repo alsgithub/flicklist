@@ -236,6 +236,8 @@ function removeFromWatchlist(id) {
 function removeActiveMovieFromWatchlist() {
     var activeMovie = model.browseItems[model.browseActiveIndex];
     removeFromWatchlist(activeMovie.id);
+    var $toastContent = $('<span>Removed <u>' + activeMovie.title + '</u> from watchlist</span>');
+    Materialize.toast($toastContent, 4000, 'rounded');
 }
 
 function addActiveMovie() {
@@ -246,6 +248,9 @@ function addActiveMovie() {
     renderActiveDetails();
     // render watchlist
     renderWatchlist();
+
+    var $toastContent = $('<span>Added <u>' + activeMovie.title + '</u> to watchlist</span>');
+    Materialize.toast($toastContent, 4000, 'rounded');
 }
 
 function setActiveMovie(movieIndex) {
