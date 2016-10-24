@@ -172,6 +172,15 @@ function renderCarousel() {
     // manually select middle item (so the details will match the visible item)
 	carousel.select(numberOfItems / 2, 0);
 
+    // update the search result count if they have searched
+	var searchResultsCount = $("#searchResultsCount");
+
+	if ($("#search-field").val() != "") {
+	    searchResultsCount.text(numberOfItems + " Results");
+	} else {
+	    searchResultsCount.text("");
+	}
+
 }
 
 function renderWatchlist() {
