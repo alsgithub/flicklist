@@ -313,7 +313,9 @@ function renderActiveDetails() {
 
     //// disable or enable the Add to Watchlist button depending on
     //// whether the current active movie is already on the user's watchlist
-    var alreadyOnWatchlist = model.watchlistItems.indexOf(activeMovie) !== -1;
+    //var alreadyOnWatchlist = model.watchlistItems.indexOf(activeMovie) !== - 1;
+    var watchlistIndex = watchlistItemsIndexOfId(activeMovie.id);
+    var alreadyOnWatchlist = watchlistIndex !== -1;
     if (alreadyOnWatchlist) {
         $("#activeAddToWatchlist").hide();
         $("#activeRemoveFromWatchlist").show();
@@ -362,4 +364,21 @@ function setActiveMovie(movieIndex) {
     model.browseActiveIndex = movieIndex;
 
     renderActiveDetails();
+}
+
+/**
+ * Returns the array index of the Watchlist item (movie) with a matching id
+ * If there are no matches, -1 is returned
+ */
+function watchlistItemsIndexOfId(id) {
+    var index = -1;
+
+    model.watchlistItems.forEach(function (movie) {
+        if (movie.id == id) {
+            index = movie.index;
+        }
+    });
+
+    // No match
+    return index;
 }
