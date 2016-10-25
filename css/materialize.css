@@ -3433,7 +3433,7 @@ input[type=range] + .thumb {
 
 .section {
   padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0rem;
 }
 
 .section.no-pad {
@@ -3451,7 +3451,7 @@ input[type=range] + .thumb {
 .row {
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .row:after {

@@ -56,7 +56,11 @@ function searchMovies(query, callback) {
     fetchKeywords(
       query,
       function (keywordsResponse) {
-          console.log("fetch succeeded");
+          if (keywordsResponse.results.length == 0) {
+              // No Keyword Matches
+              handleNoMatches();
+              return false;
+          }
           var firstKeywordId = keywordsResponse.results[0].id;
           var data = {
               api_key: api.token,
@@ -65,13 +69,15 @@ function searchMovies(query, callback) {
           discoverMovies(data, callback);
       },
       function () {
-          console.log("fetchkeywords failed");
           var data = {
               api_key: api.token
           };
           discoverMovies(data, callback);
       }
     );
+
+    var elementToScrollTo = document.getElementById('movieCarouselHost');
+    elementToScrollTo.scrollIntoView();
 }
 
 /**
@@ -94,6 +100,13 @@ function fetchKeywords(query, cbSuccess, cbError) {
     });
 }
 
+function handleNoMatches() {
+    model.browseActiveIndex = 0;
+    model.browseItems = [];
+
+    renderCarousel();
+    renderActiveDetails();
+}
 
 /**
  * re-renders the page with new content, based on the current state of the model
@@ -107,6 +120,21 @@ function render() {
 function renderCarousel() {
     // clear top level carousel element
     $("#movieCarouselOuter").remove();
+
+    // Handle for 'no results'
+    if (model.browseItems.length == 0) {
+        // rebuild entire carousel (which will just have a 'no results' message in it
+        var carouselOuterNoResults = $("<div><center><h5>No movies matched your search criteria</h5></center></div>")
+            .attr("id", "movieCarouselOuter")
+            .attr("style", "margin-top: 100px");
+
+        $("#movieCarouselHost").append(carouselOuterNoResults);
+
+        //handle Search Results Count
+        $("#searchResultsCount").hide();
+
+        return true;
+    }
 
     // rebuild entire carousel (so searches and 'refreshes' work)
     var carouselChild = $("<ul></ul>")
@@ -146,20 +174,20 @@ function renderCarousel() {
 	var carousel = $('.sky-carousel').carousel({
 		itemWidth: 200,
 		itemHeight: 300,
-		distance: 15,
-		selectedItemDistance: 20,
+		distance: 12,
+		selectedItemDistance: 17,
 		selectedItemZoomFactor: .8,
 		unselectedItemZoomFactor: 0.67,
 		unselectedItemAlpha: 0.6,
 		motionStartDistance: 170,
-		topMargin: 119,
+		topMargin: 15,
 		gradientStartPoint: 0.35,
 		gradientOverlayColor: "#ffffff",
-		gradientOverlaySize: 20,
+		gradientOverlaySize: 15,
 		reflectionDistance: 1,
 		reflectionAlpha: 0.35,
 		reflectionVisible: true,
-		reflectionSize: 70,
+		reflectionSize: 30,
 		selectByClick: true,
 		navigationButtonsVisible: false
 	});
@@ -170,7 +198,17 @@ function renderCarousel() {
 	});
 
     // manually select middle item (so the details will match the visible item)
-	carousel.select(numberOfItems / 2, 0);
+	if (numberOfItems > 0) {
+	    try {
+	        carousel.select(numberOfItems / 2, 0);
+	    }
+	    catch (e) {
+	        // statements to handle any exceptions
+	        carousel.selectNext();
+	        carousel.selectPrevious();
+	        console.log(e.message);
+	    }
+	}
 
     // update the search result count if they have searched
 	var searchResultsCount = $("#searchResultsCount");
@@ -258,6 +296,15 @@ function renderWatchlist() {
 }
 
 function renderActiveDetails() {
+    console.log("start: renderActiveDetails [model.browserItems.length=" + model.browseItems.length + "]");
+
+    if (model.browseItems.length == 0) {
+        $("#activeMovieSection").hide();
+        return false;
+    } else {
+        $("#activeMovieSection").show();
+    }
+
     // Get Active Movie
     var activeMovie = model.browseItems[model.browseActiveIndex];
 
